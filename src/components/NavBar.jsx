@@ -13,7 +13,7 @@ const NavBar = () => {
       gap={4}
       sx={{
         backgroundColor: "#000",
-        height: "70px",
+        height: "10vh",
         px: "20px",
         py: "40px",
       }}
