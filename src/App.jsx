@@ -1,12 +1,12 @@
 import React from "react"
 import { Routes, Route } from "react-router-dom"
-import { Box } from "@mui/material"
+import { Stack } from "@mui/material"
 import { Home, Channel, Video, Search } from "./pages"
 import NavBar from "./components/NavBar"
 
 const App = () => {
   return (
-    <Box>
+    <Stack sx={{ height: "100vh", width: "100vw" }}>
       <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -14,7 +14,7 @@ const App = () => {
         <Route path="/channel/:channelId" element={<Channel />} />
         <Route path="/video/:videoId" element={<Video />} />
       </Routes>
-    </Box>
+    </Stack>
   )
 }
 
