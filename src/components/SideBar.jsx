@@ -1,8 +1,13 @@
 import React from "react"
 import { Stack, Chip } from "@mui/material"
 import { categories } from "../utils/constants"
+import { useDispatch, useSelector } from "react-redux"
+import { changeCategory } from "../store"
 
 const SideBar = () => {
+  const dispatch = useDispatch()
+  const selectedCategory = useSelector((store) => store.data.category)
+
   return (
     <Stack
       gap={0.5}
@@ -17,9 +22,19 @@ const SideBar = () => {
         p: "12px",
       }}
     >
-      {categories.map((category, idx) => (
-        <Chip key={idx} clickable icon={category.icon} label={category.name} color="error" />
-      ))}
+      {categories.map((category, idx) => {
+        const isSelected = category.name == selectedCategory
+        return (
+          <Chip
+            key={idx}
+            clickable={!isSelected}
+            onClick={() => dispatch(changeCategory(category.name))}
+            icon={category.icon}
+            label={category.name}
+            color={isSelected ? "selected" : "notSelected"}
+          />
+        )
+      })}
     </Stack>
   )
 }
