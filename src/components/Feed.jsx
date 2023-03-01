@@ -10,7 +10,13 @@ const Feed = () => {
   console.log(data)
 
   return (
-    <Box sx={{ height: "90vh", overflow: "auto", p: { xs: "26px", sm: "16px" } }}>
+    <Box
+      sx={{
+        p: { xs: "26px", sm: "16px" },
+        flexGrow: 1,
+        overflow: "auto",
+      }}
+    >
       <Typography variant="h4" fontWeight="bold" sx={{ color: "white" }}>
         {category}&nbsp;
         <Box component="span" sx={{ color: "red" }}>

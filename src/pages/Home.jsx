@@ -6,8 +6,10 @@ import { Stack } from "@mui/material"
 const Home = () => {
   return (
     <Stack
+      flexGrow={1}
       gap={2}
       sx={{
+        height: "90vh",
         flexDirection: { xs: "column", sm: "row" },
         bgcolor: "#000",
         borderTop: "4px solid red",
