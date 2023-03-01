@@ -13,12 +13,12 @@ const SideBar = () => {
           sm: "180px",
           md: "220px",
         },
-        overflow: 'auto',
+        overflow: "auto",
         p: "12px",
       }}
     >
-      {categories.map((category) => (
-        <Chip clickable icon={category.icon} label={category.name} color="error"  />
+      {categories.map((category, idx) => (
+        <Chip key={idx} clickable icon={category.icon} label={category.name} color="error" />
       ))}
     </Stack>
   )
