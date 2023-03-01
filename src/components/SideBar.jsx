@@ -10,6 +10,7 @@ const SideBar = () => {
 
   return (
     <Stack
+      flexShrink={0}
       gap={0.5}
       sx={{
         flexDirection: { xs: "row", sm: "column" },
