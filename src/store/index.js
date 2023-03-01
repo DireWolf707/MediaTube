@@ -1,9 +1,18 @@
 import { configureStore } from "@reduxjs/toolkit"
 import { youtubeApi } from "./apis/youtubeApi"
 import { setupListeners } from "@reduxjs/toolkit/query"
+import { changeCategory, searchReducer } from "./slices/searchSlice"
+import {
+  useChannelVideosQuery,
+  useDetailChannelQuery,
+  useDetailVideoQuery,
+  useSearchVideosQuery,
+  useSuggestedVideosQuery,
+} from "./apis/youtubeApi"
 
 export const store = configureStore({
   reducer: {
+    data: searchReducer,
     [youtubeApi.reducerPath]: youtubeApi.reducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(youtubeApi.middleware),
@@ -11,10 +20,4 @@ export const store = configureStore({
 
 setupListeners(store.dispatch)
 
-export {
-  useChannelVideosQuery,
-  useDetailChannelQuery,
-  useDetailVideoQuery,
-  useSearchVideosQuery,
-  useSuggestedVideosQuery,
-} from "./apis/youtubeApi"
+export { useChannelVideosQuery, useDetailChannelQuery, useDetailVideoQuery, useSearchVideosQuery, useSuggestedVideosQuery, changeCategory }
