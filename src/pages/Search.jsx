@@ -1,9 +1,22 @@
-import React from 'react'
+import React from "react"
+import Feed from "../components/Feed"
+import { Stack } from "@mui/material"
 
-const Search = () => {
+const Home = () => {
   return (
-    <div>Search</div>
+    <Stack
+      flexGrow={1}
+      gap={2}
+      sx={{
+        flexDirection: { xs: "column", sm: "row" },
+        bgcolor: "#000",
+        borderTop: "4px solid red",
+        overflow: "hidden",
+      }}
+    >
+      <Feed />
+    </Stack>
   )
 }
 
-export default Search
+export default Home
