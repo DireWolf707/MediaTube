@@ -3,8 +3,12 @@ import { Box, Stack, Typography } from "@mui/material"
 import { logo } from "../utils/constants"
 import { Link } from "react-router-dom"
 import SearchBar from "./SearchBar"
+import { useDispatch } from "react-redux"
+import { resetSearchTerm } from "../store"
 
 const NavBar = () => {
+  const dispatch = useDispatch()
+
   return (
     <Stack
       direction="row"
@@ -21,7 +25,7 @@ const NavBar = () => {
     >
       <Stack direction="row" alignItems="center" gap={1}>
         <Box component="img" src={logo} alt="logo" sx={{ height: "50px" }} />
-        <Link to="/">
+        <Link to="/" onClick={() => dispatch(resetSearchTerm())}>
           <Typography color="red" variant="h6">
             MediaTube
           </Typography>
