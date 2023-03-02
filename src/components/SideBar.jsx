@@ -15,7 +15,7 @@ const SideBar = () => {
       sx={{
         flexDirection: { xs: "row", sm: "column" },
         width: {
-          xs: 1,
+          xs: "100%",
           sm: "180px",
           md: "220px",
         },
