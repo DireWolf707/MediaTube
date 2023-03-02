@@ -5,9 +5,8 @@ import { useSearchVideosQuery } from "../store"
 import VideoCard from "./VideoCard"
 
 const Feed = () => {
-  const { category } = useSelector((store) => store.data)
-  const { data, isFetching } = useSearchVideosQuery(category, { refetchOnMountOrArgChange: true })
-  console.log(data)
+  const { searchTerm } = useSelector((store) => store.data)
+  const { data, isFetching } = useSearchVideosQuery(searchTerm, { refetchOnMountOrArgChange: true })
 
   return (
     <Stack
@@ -19,14 +18,14 @@ const Feed = () => {
       }}
     >
       <Typography variant="h4" fontWeight="bold" sx={{ color: "white", p: 2 }}>
-        {category}&nbsp;
+        {searchTerm}&nbsp;
         <Box component="span" sx={{ color: "red" }}>
           Videos
         </Box>
       </Typography>
 
-      <Stack flexGrow={1} direction="row" justifyContent="center" flexWrap="wrap" gap={2} sx={{ overflow: "auto" }}>
-        {data && data.items.map((video) => <VideoCard video={video} />)}
+      <Stack direction="row" justifyContent="center" flexWrap="wrap" gap={2} sx={{ overflow: "auto" }}>
+        {data && data.items.map((video) => video.id.videoId && <VideoCard key={video.id.videoId} video={video} />)}
       </Stack>
     </Stack>
   )
