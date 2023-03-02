@@ -5,7 +5,7 @@ export const youtubeApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "https://youtube-v31.p.rapidapi.com",
     headers: {
-      "X-RapidAPI-Key": "ea914ea896msh94f546fe0e85896p1e986ajsn86f8b9163431",
+      "X-RapidAPI-Key": "1cfed548c6msh03827b7f2d7e802p1307d0jsned496e327d03",
       "X-RapidAPI-Host": "youtube-v31.p.rapidapi.com",
     },
   }),
@@ -14,8 +14,15 @@ export const youtubeApi = createApi({
       searchVideos: builder.query({
         query: (searchTerm) => {
           return {
-            url: `/search?q=${searchTerm}&part=snippet%2Cid`,
+            url: "/search",
             method: "GET",
+            params: {
+              q: searchTerm,
+              part: "snippet,id",
+              regionCode: "IN",
+              maxResults: "50",
+              order: "date",
+            },
           }
         },
       }),
@@ -23,8 +30,14 @@ export const youtubeApi = createApi({
       suggestedVideos: builder.query({
         query: (videoId) => {
           return {
-            url: `/search?relatedToVideoId=${videoId}&part=id%2Csnippet&type=video`,
+            url: "/search",
             method: "GET",
+            params: {
+              relatedToVideoId: videoId,
+              part: "id,snippet",
+              type: "video",
+              maxResults: "50",
+            },
           }
         },
       }),
@@ -32,8 +45,12 @@ export const youtubeApi = createApi({
       detailVideo: builder.query({
         query: (videoId) => {
           return {
-            url: `/videos?part=contentDetails%2Csnippet%2Cstatistics&id=${videoId}`,
+            url: "/videos",
             method: "GET",
+            params: {
+              id: videoId,
+              part: "contentDetails,snippet,statistics",
+            },
           }
         },
       }),
@@ -41,8 +58,14 @@ export const youtubeApi = createApi({
       channelVideos: builder.query({
         query: (channelId) => {
           return {
-            url: `/search?channelId=${channelId}&part=snippet%2Cid`,
+            url: "/search",
             method: "GET",
+            params: {
+              channelId: channelId,
+              part: "snippet,id",
+              order: "date",
+              maxResults: "50",
+            },
           }
         },
       }),
@@ -50,8 +73,12 @@ export const youtubeApi = createApi({
       detailChannel: builder.query({
         query: (channelId) => {
           return {
-            url: `/channels?part=snippet%2Cstatistics&id=${channelId}`,
+            url: "/channels",
             method: "GET",
+            params: {
+              part: "snippet,statistics",
+              id: channelId,
+            },
           }
         },
       }),
