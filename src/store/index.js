@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit"
 import { youtubeApi } from "./apis/youtubeApi"
 import { setupListeners } from "@reduxjs/toolkit/query"
-import { changeCategory, searchReducer } from "./slices/searchSlice"
+import { changeSearchTerm, searchReducer, resetSearchTerm } from "./slices/searchSlice"
 import {
   useChannelVideosQuery,
   useDetailChannelQuery,
@@ -20,4 +20,12 @@ export const store = configureStore({
 
 setupListeners(store.dispatch)
 
-export { useChannelVideosQuery, useDetailChannelQuery, useDetailVideoQuery, useSearchVideosQuery, useSuggestedVideosQuery, changeCategory }
+export {
+  useChannelVideosQuery,
+  useDetailChannelQuery,
+  useDetailVideoQuery,
+  useSearchVideosQuery,
+  useSuggestedVideosQuery,
+  changeSearchTerm,
+  resetSearchTerm,
+}

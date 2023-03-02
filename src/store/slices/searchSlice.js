@@ -4,14 +4,17 @@ import { categories } from "../../utils/constants"
 const searchSlice = createSlice({
   name: "data",
   initialState: {
-    category: categories[0].name,
+    searchTerm: categories[0].name,
   },
   reducers: {
-    changeCategory(state, action) {
-      state.category = action.payload
+    changeSearchTerm(state, action) {
+      state.searchTerm = action.payload
+    },
+    resetSearchTerm(state, action) {
+      state.searchTerm = categories[0].name
     },
   },
 })
 
-export const { changeCategory } = searchSlice.actions
+export const { changeSearchTerm, resetSearchTerm } = searchSlice.actions
 export const searchReducer = searchSlice.reducer
