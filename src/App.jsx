@@ -6,7 +6,7 @@ import NavBar from "./components/NavBar"
 
 const App = () => {
   return (
-    <Stack sx={{ height: "100vh", width: "100vw" }}>
+    <Stack sx={{ height: "100vh", width: "100vw", bgcolor: "#000" }}>
       <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
