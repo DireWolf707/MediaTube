@@ -1,22 +1,22 @@
 import React from "react"
 import { Link, useParams } from "react-router-dom"
 import ReactPlayer from "react-player"
-import { Typography, Stack } from "@mui/material"
-import { useDetailVideoQuery } from "../store"
+import { Typography, Stack, useMediaQuery } from "@mui/material"
 import Feed from "../components/Feed"
-import { useMediaQuery } from "@mui/material"
+import { useSuggestedVideosQuery, useDetailVideoQuery } from "../store"
 
 const Video = () => {
   const isSmall = useMediaQuery((theme) => theme.breakpoints.between("xs", "md"))
   const { videoId } = useParams()
-  const { data, isFetching } = useDetailVideoQuery(videoId, { refetchOnMountOrArgChange: true })
+  const { data: videoData, isFetching: isVideoDataFetching } = useDetailVideoQuery(videoId, { refetchOnMountOrArgChange: true })
+  const { data, isFetching } = useSuggestedVideosQuery(videoId, { refetchOnMountOrArgChange: true })
 
-  if (isFetching) return <></>
+  if (isVideoDataFetching) return <></>
 
   const {
     snippet: { title, channelId, channelTitle },
     statistics: { viewCount, likeCount },
-  } = data.items[0]
+  } = videoData.items[0]
 
   return (
     <Stack flexGrow={1} sx={{ flexDirection: { sm: "column", md: "row" }, overflow: "auto" }}>
@@ -40,7 +40,7 @@ const Video = () => {
 
         <Stack direction="row" justifyContent="space-between" sx={{ color: "#fff" }} py={1} px={2}>
           <Link to={`/channel/${channelId}`}>
-            <Typography variant={{ sm: "subtitle1", md: "h6" }} color="#fff">
+            <Typography variant="h6" color="#fff">
               {channelTitle}
             </Typography>
           </Link>
@@ -56,7 +56,8 @@ const Video = () => {
           </Stack>
         </Stack>
       </Stack>
-      <Feed feedOverflow={!isSmall} />
+
+      <Feed data={data} isFetching={isFetching} searchTerm="Suggested" feedOverflow={!isSmall} />
     </Stack>
   )
 }

@@ -1,8 +1,13 @@
 import React from "react"
 import Feed from "../components/Feed"
 import { Stack } from "@mui/material"
+import { useSearchVideosQuery } from "../store"
+import { useParams } from "react-router-dom"
 
 const Home = () => {
+  const { searchTerm } = useParams()
+  const { data, isFetching } = useSearchVideosQuery(searchTerm, { refetchOnMountOrArgChange: true })
+
   return (
     <Stack
       flexGrow={1}
@@ -14,7 +19,7 @@ const Home = () => {
         overflow: "hidden",
       }}
     >
-      <Feed />
+      <Feed data={data} isFetching={isFetching} searchTerm={searchTerm} />
     </Stack>
   )
 }

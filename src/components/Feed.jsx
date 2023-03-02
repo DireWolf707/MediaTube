@@ -1,16 +1,9 @@
 import React from "react"
 import { Box, Typography, Stack } from "@mui/material"
-import { useSelector } from "react-redux"
-import { useSearchVideosQuery } from "../store"
+
 import VideoCard from "./VideoCard"
-import { useParams } from "react-router-dom"
 
-const Feed = ({ feedOverflow = true }) => {
-  const { searchTerm } = useParams()
-  const category = useSelector((store) => store.data.category)
-  const search = searchTerm ? searchTerm : category
-  const { data, isFetching } = useSearchVideosQuery(search, { refetchOnMountOrArgChange: true })
-
+const Feed = ({ data, isFetching, searchTerm, feedOverflow = true }) => {
   return (
     <Stack
       flexGrow={1}
@@ -21,7 +14,7 @@ const Feed = ({ feedOverflow = true }) => {
       }}
     >
       <Typography variant="h4" fontWeight="bold" sx={{ color: "white", p: 2 }}>
-        {search}&nbsp;
+        {searchTerm}&nbsp;
         <Box component="span" sx={{ color: "red" }}>
           Videos
         </Box>
