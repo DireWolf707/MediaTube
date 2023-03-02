@@ -2,11 +2,11 @@ import React from "react"
 import { Stack, Chip } from "@mui/material"
 import { categories } from "../utils/constants"
 import { useDispatch, useSelector } from "react-redux"
-import { changeCategory } from "../store"
+import { changeSearchTerm } from "../store"
 
 const SideBar = () => {
   const dispatch = useDispatch()
-  const selectedCategory = useSelector((store) => store.data.category)
+  const searchTerm = useSelector((store) => store.data.searchTerm)
 
   return (
     <Stack
@@ -24,12 +24,12 @@ const SideBar = () => {
       }}
     >
       {categories.map((category, idx) => {
-        const isSelected = category.name == selectedCategory
+        const isSelected = category.name == searchTerm
         return (
           <Chip
             key={idx}
             clickable={!isSelected}
-            onClick={() => dispatch(changeCategory(category.name))}
+            onClick={() => dispatch(changeSearchTerm(category.name))}
             icon={category.icon}
             label={category.name}
             color={isSelected ? "selected" : "notSelected"}
