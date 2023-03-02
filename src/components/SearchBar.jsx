@@ -1,12 +1,9 @@
 import React, { useRef } from "react"
 import SearchIcon from "@mui/icons-material/Search"
 import { Box, Paper, IconButton } from "@mui/material"
-import { useDispatch } from "react-redux"
-import { changeSearchTerm } from "../store"
 import { useNavigate } from "react-router-dom"
 
 const SearchBar = () => {
-  const dispatch = useDispatch()
   const navigate = useNavigate()
 
   const inpRef = useRef(null)
@@ -14,9 +11,8 @@ const SearchBar = () => {
     e.preventDefault()
     const searchTerm = inpRef.current.value
     if (searchTerm.length == 0) return
-    dispatch(changeSearchTerm(searchTerm))
-    navigate(`/search/${searchTerm}`)
     inpRef.current.value = ""
+    navigate(`/search/${searchTerm}`)
   }
 
   return (

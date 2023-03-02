@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit"
 import { youtubeApi } from "./apis/youtubeApi"
 import { setupListeners } from "@reduxjs/toolkit/query"
-import { changeSearchTerm, searchReducer, resetSearchTerm } from "./slices/searchSlice"
+import { changeCategory, resetCategory, searchReducer } from "./slices/searchSlice"
 import {
   useChannelVideosQuery,
   useDetailChannelQuery,
@@ -26,6 +26,6 @@ export {
   useDetailVideoQuery,
   useSearchVideosQuery,
   useSuggestedVideosQuery,
-  changeSearchTerm,
-  resetSearchTerm,
+  changeCategory,
+  resetCategory,
 }
