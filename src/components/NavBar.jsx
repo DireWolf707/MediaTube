@@ -10,10 +10,11 @@ const NavBar = () => {
       direction="row"
       justifyContent="space-between"
       alignItems="center"
+      flexShrink={0}
       gap={4}
       sx={{
         backgroundColor: "#000",
-        height: "10vh",
+        height: "70px",
         px: "20px",
         py: "40px",
       }}

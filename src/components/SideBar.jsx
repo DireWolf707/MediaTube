@@ -33,6 +33,7 @@ const SideBar = () => {
             icon={category.icon}
             label={category.name}
             color={isSelected ? "selected" : "notSelected"}
+            sx={{ flexShrink: 0 }}
           />
         )
       })}

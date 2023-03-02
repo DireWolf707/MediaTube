@@ -10,24 +10,25 @@ const Feed = () => {
   console.log(data)
 
   return (
-    <Box
+    <Stack
+      flexGrow={1}
       sx={{
-        p: { xs: "26px", sm: "16px" },
-        flexGrow: 1,
-        overflow: "auto",
+        px: { xs: "26px", sm: "16px" },
+        pb: "13px",
+        overflow: "hidden",
       }}
     >
-      <Typography variant="h4" fontWeight="bold" sx={{ color: "white" }}>
+      <Typography variant="h4" fontWeight="bold" sx={{ color: "white", p: 2 }}>
         {category}&nbsp;
         <Box component="span" sx={{ color: "red" }}>
           Videos
         </Box>
       </Typography>
 
-      <Stack direction="row" justifyContent="center" flexWrap="wrap" gap={2}>
+      <Stack flexGrow={1} direction="row" justifyContent="center" flexWrap="wrap" gap={2} sx={{ overflow: "auto" }}>
         {data && data.items.map((video) => <VideoCard video={video} />)}
       </Stack>
-    </Box>
+    </Stack>
   )
 }
 
