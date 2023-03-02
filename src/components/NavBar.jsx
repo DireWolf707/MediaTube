@@ -11,7 +11,7 @@ const NavBar = () => {
 
   return (
     <Stack
-      direction="row"
+      flexDirection="row"
       justifyContent="space-between"
       alignItems="center"
       flexShrink={0}
@@ -21,9 +21,10 @@ const NavBar = () => {
         height: "70px",
         px: "20px",
         py: "40px",
+        borderBottom: "4px solid red",
       }}
     >
-      <Stack direction="row" alignItems="center" gap={1}>
+      <Stack flexDirection="row" alignItems="center" gap={1}>
         <Box component="img" src={logo} alt="logo" sx={{ height: "50px" }} />
         <Link to="/" onClick={() => dispatch(resetCategory())}>
           <Typography color="red" variant="h6">

@@ -11,8 +11,7 @@ const Home = () => {
       sx={{
         flexDirection: { xs: "column", sm: "row" },
         bgcolor: "#000",
-        borderTop: "4px solid red",
-        overflow: "hidden"
+        overflow: "auto"
       }}
     >
       <SideBar />
