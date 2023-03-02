@@ -5,7 +5,7 @@ import { useSearchVideosQuery } from "../store"
 import VideoCard from "./VideoCard"
 import { useParams } from "react-router-dom"
 
-const Feed = () => {
+const Feed = ({ feedOverflow = true }) => {
   const { searchTerm } = useParams()
   const category = useSelector((store) => store.data.category)
   const search = searchTerm ? searchTerm : category
@@ -17,7 +17,7 @@ const Feed = () => {
       sx={{
         px: { xs: "26px", sm: "16px" },
         pb: "13px",
-        overflow: "hidden",
+        overflow: feedOverflow ? "auto" : "visible",
       }}
     >
       <Typography variant="h4" fontWeight="bold" sx={{ color: "white", p: 2 }}>
@@ -27,8 +27,8 @@ const Feed = () => {
         </Box>
       </Typography>
 
-      <Stack direction="row" justifyContent="center" flexWrap="wrap" gap={2} sx={{ overflow: "auto" }}>
-        {data && data.items.map((video) => video.id.videoId && <VideoCard key={video.id.videoId} video={video} />)}
+      <Stack flexDirection="row" justifyContent="center" flexWrap="wrap" gap={2} sx={{ overflow: feedOverflow ? "auto" : "visible" }}>
+        {!isFetching && data.items.map((video) => video.id.videoId && <VideoCard key={video.id.videoId} video={video} />)}
       </Stack>
     </Stack>
   )
