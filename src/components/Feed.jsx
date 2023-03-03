@@ -13,12 +13,14 @@ const Feed = ({ data, isFetching, searchTerm, feedOverflow = true }) => {
         overflow: feedOverflow ? "auto" : "visible",
       }}
     >
-      <Typography variant="h4" fontWeight="bold" sx={{ color: "white", p: 2 }}>
-        {searchTerm}&nbsp;
-        <Box component="span" sx={{ color: "red" }}>
-          Videos
-        </Box>
-      </Typography>
+      {searchTerm && (
+        <Typography variant="h4" fontWeight="bold" sx={{ color: "white", p: 2 }}>
+          {searchTerm}&nbsp;
+          <Box component="span" sx={{ color: "red" }}>
+            Videos
+          </Box>
+        </Typography>
+      )}
 
       <Stack flexDirection="row" justifyContent="center" flexWrap="wrap" gap={2} sx={{ overflow: feedOverflow ? "auto" : "visible" }}>
         {isFetching

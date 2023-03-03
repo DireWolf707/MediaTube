@@ -23,7 +23,7 @@ const Channel = () => {
       <Stack flexShrink={0} justifyContent="center" alignItems="center" marginTop="-93px">
         {isChannelDataFetching ? <ChannelCardSkeleton /> : <ChannelCard channelDetail={channelData.items[0]} />}
       </Stack>
-      {!isChannelDataFetching && <Feed data={data} isFetching={isFetching} searchTerm={channelData.items[0].snippet?.title} feedOverflow={false} />}
+      <Feed data={data} isFetching={isFetching} searchTerm={channelData?.items[0].snippet?.title} feedOverflow={false} />
     </Stack>
   )
 }
