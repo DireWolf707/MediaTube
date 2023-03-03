@@ -1,7 +1,7 @@
 import React from "react"
 import { Box, Typography, Stack } from "@mui/material"
-
 import VideoCard from "./VideoCard"
+import VideoCardSkeleton from "./skeletons/VideoCardSkeleton"
 
 const Feed = ({ data, isFetching, searchTerm, feedOverflow = true }) => {
   return (
@@ -21,7 +21,11 @@ const Feed = ({ data, isFetching, searchTerm, feedOverflow = true }) => {
       </Typography>
 
       <Stack flexDirection="row" justifyContent="center" flexWrap="wrap" gap={2} sx={{ overflow: feedOverflow ? "auto" : "visible" }}>
-        {!isFetching && data.items.map((video) => video.id.videoId && <VideoCard key={video.id.videoId} video={video} />)}
+        {isFetching
+          ? Array(8)
+              .fill(0)
+              .map((_, idx) => <VideoCardSkeleton key={idx} />)
+          : data.items.map((video) => video.id.videoId && <VideoCard key={video.id.videoId} video={video} />)}
       </Stack>
     </Stack>
   )
