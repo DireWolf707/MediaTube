@@ -4,13 +4,12 @@ import { Stack, Box } from "@mui/material"
 import Feed from "../components/Feed"
 import { useDetailChannelQuery, useChannelVideosQuery } from "../store"
 import ChannelCard from "../components/ChannelCard"
+import ChannelCardSkeleton from "../components/skeletons/ChannelCardSkeleton"
 
 const Channel = () => {
   const { channelId } = useParams()
   const { data: channelData, isFetching: isChannelDataFetching } = useDetailChannelQuery(channelId, { refetchOnMountOrArgChange: true })
   const { data, isFetching } = useChannelVideosQuery(channelId, { refetchOnMountOrArgChange: true })
-
-  if (isChannelDataFetching) return <></>
 
   return (
     <Stack flexGrow={1} sx={{ overflow: "auto" }}>
@@ -22,9 +21,9 @@ const Channel = () => {
         }}
       />
       <Stack flexShrink={0} justifyContent="center" alignItems="center" marginTop="-93px">
-        <ChannelCard channelDetail={channelData.items[0]} />
+        {isChannelDataFetching ? <ChannelCardSkeleton /> : <ChannelCard channelDetail={channelData.items[0]} />}
       </Stack>
-      <Feed data={data} isFetching={isFetching} searchTerm={channelData.items[0].snippet?.title} feedOverflow={false} />
+      {!isChannelDataFetching && <Feed data={data} isFetching={isFetching} searchTerm={channelData.items[0].snippet?.title} feedOverflow={false} />}
     </Stack>
   )
 }
