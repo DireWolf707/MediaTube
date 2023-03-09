@@ -7,7 +7,7 @@ import { useSearchVideosQuery } from "../store"
 
 const Home = () => {
   const searchTerm = useSelector((store) => store.data.category)
-  const { data, isFetching } = useSearchVideosQuery(searchTerm, { refetchOnMountOrArgChange: true })
+  const { data, isFetching, isError } = useSearchVideosQuery(searchTerm, { refetchOnMountOrArgChange: true })
 
   return (
     <Stack
@@ -20,7 +20,7 @@ const Home = () => {
       }}
     >
       <SideBar />
-      <Feed data={data} isFetching={isFetching} searchTerm={searchTerm} />
+      <Feed data={data} isFetching={isFetching || isError} searchTerm={searchTerm} />
     </Stack>
   )
 }

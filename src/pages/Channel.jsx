@@ -8,9 +8,13 @@ import ChannelCardSkeleton from "../components/skeletons/ChannelCardSkeleton"
 
 const Channel = () => {
   const { channelId } = useParams()
-  const { data: channelData, isFetching: isChannelDataFetching } = useDetailChannelQuery(channelId, { refetchOnMountOrArgChange: true })
-  const { data, isFetching } = useChannelVideosQuery(channelId, { refetchOnMountOrArgChange: true })
-
+  const {
+    data: channelData,
+    isFetching: isChannelDataFetching,
+    isError: isChannelDataError,
+  } = useDetailChannelQuery(channelId, { refetchOnMountOrArgChange: true })
+  const { data, isFetching, isError } = useChannelVideosQuery(channelId, { refetchOnMountOrArgChange: true })
+  console.log(channelData)
   return (
     <Stack flexGrow={1} sx={{ overflow: "auto" }}>
       <Box
@@ -21,9 +25,13 @@ const Channel = () => {
         }}
       />
       <Stack flexShrink={0} justifyContent="center" alignItems="center" marginTop="-93px">
-        {isChannelDataFetching ? <ChannelCardSkeleton /> : <ChannelCard channelDetail={channelData.items[0]} />}
+        {isChannelDataFetching || isChannelDataError || channelData?.error ? (
+          <ChannelCardSkeleton />
+        ) : (
+          <ChannelCard channelDetail={channelData?.items?.[0]} />
+        )}
       </Stack>
-      <Feed data={data} isFetching={isFetching} searchTerm={channelData?.items[0].snippet?.title} feedOverflow={false} />
+      <Feed data={data} isFetching={isFetching || isError} searchTerm={channelData?.items?.[0]?.snippet?.title} feedOverflow={false} />
     </Stack>
   )
 }

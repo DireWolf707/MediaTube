@@ -23,7 +23,7 @@ const Feed = ({ data, isFetching, searchTerm, feedOverflow = true }) => {
       )}
 
       <Stack flexDirection="row" justifyContent="center" flexWrap="wrap" gap={2} sx={{ overflow: feedOverflow ? "auto" : "visible" }}>
-        {isFetching
+        {isFetching || data?.error
           ? Array(8)
               .fill(0)
               .map((_, idx) => <VideoCardSkeleton key={idx} />)

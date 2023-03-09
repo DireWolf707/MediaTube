@@ -9,8 +9,12 @@ import PlayerSkeleton from "../components/skeletons/PlayerSkeleton"
 const Video = () => {
   const isSmall = useMediaQuery((theme) => theme.breakpoints.between("xs", "md"))
   const { videoId } = useParams()
-  const { data: videoData, isFetching: isVideoDataFetching } = useDetailVideoQuery(videoId, { refetchOnMountOrArgChange: true })
-  const { data, isFetching } = useSuggestedVideosQuery(videoId, { refetchOnMountOrArgChange: true })
+  const {
+    data: videoData,
+    isFetching: isVideoDataFetching,
+    isError: isVideoDataError,
+  } = useDetailVideoQuery(videoId, { refetchOnMountOrArgChange: true })
+  const { data, isFetching, isError } = useSuggestedVideosQuery(videoId, { refetchOnMountOrArgChange: true })
 
   return (
     <Stack flexGrow={1} sx={{ flexDirection: { sm: "column", md: "row" }, overflow: "auto" }}>
@@ -26,10 +30,14 @@ const Video = () => {
           height: "90%",
         }}
       >
-        {isVideoDataFetching ? <PlayerSkeleton /> : <Player videoData={videoData.items[0]} videoId={videoId} />}
+        {isVideoDataFetching || isVideoDataError || videoData.error ? (
+          <PlayerSkeleton />
+        ) : (
+          <Player videoData={videoData.items[0]} videoId={videoId} />
+        )}
       </Stack>
 
-      <Feed data={data} isFetching={isFetching} searchTerm="Suggested" feedOverflow={!isSmall} />
+      <Feed data={data} isFetching={isFetching || isError} searchTerm="Suggested" feedOverflow={!isSmall} />
     </Stack>
   )
 }

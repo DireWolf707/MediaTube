@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom"
 
 const Home = () => {
   const { searchTerm } = useParams()
-  const { data, isFetching } = useSearchVideosQuery(searchTerm, { refetchOnMountOrArgChange: true })
+  const { data, isFetching, isError } = useSearchVideosQuery(searchTerm, { refetchOnMountOrArgChange: true })
 
   return (
     <Stack
@@ -19,7 +19,7 @@ const Home = () => {
         overflow: "hidden",
       }}
     >
-      <Feed data={data} isFetching={isFetching} searchTerm={searchTerm} />
+      <Feed data={data} isFetching={isFetching || isError} searchTerm={searchTerm} />
     </Stack>
   )
 }
